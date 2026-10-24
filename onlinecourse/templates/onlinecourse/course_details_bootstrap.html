@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,17 +29,24 @@
             <div class="card mt-3">
                 <div class="card-body">
                     <h5>{{ question.question_text }}</h5>
-                    <form method="post" action="{% url 'submit' question.id %}">
+
+                    <form method="post" action="{% url 'submit' course.id %}">
                         {% csrf_token %}
+                        <input type="hidden" name="question_id" value="{{ question.id }}">
+
                         {% for choice in question.choices.all %}
                             <div class="form-check">
-                                <input class="form-check-input" type="radio"
-                                       name="choice" value="{{ choice.id }}" required>
+                                <input class="form-check-input"
+                                       type="radio"
+                                       name="choice"
+                                       value="{{ choice.id }}"
+                                       required>
                                 <label class="form-check-label">
                                     {{ choice.choice_text }}
                                 </label>
                             </div>
                         {% endfor %}
+
                         <button type="submit" class="btn btn-primary mt-3">
                             Submit Answer
                         </button>
