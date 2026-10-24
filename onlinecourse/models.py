@@ -1,3 +1,4 @@
+
 from django.db import models
 
 
@@ -50,11 +51,13 @@ class Choice(models.Model):
 class Submission(models.Model):
     question = models.ForeignKey(
         Question,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name="submissions"
     )
     choice = models.ForeignKey(
         Choice,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name="submissions"
     )
     is_correct = models.BooleanField(default=False)
 
